@@ -1,0 +1,41 @@
+<div class="profile-overview-container">
+
+  <div class="profile-overview-info-container">
+    <div class="profile-picture-section">
+      <div class="profile-picture-container">
+        <img [src]= "data.member.profilePicture">
+      </div>
+    </div>
+
+    <div class="profile-info-section">
+      <div class="user-name profile-info-element">
+        <h3> {{ user.name + ' ' + user.lastName}} </h3>
+      </div>
+      <div *ngIf="user.description" class="user-description profile-info-element">
+        <p> {{ user.description }}</p>
+      </div>
+      <div class="user-email profile-info-element">
+        <p>{{ user.email }}</p>
+      </div>
+      <div class="user-birthdate profile-info-element">
+        <p> {{ user.birth | date: 'longDate'}}</p>
+      </div>
+      <div class="user-school profile-info-element">
+        <p>School : </p>
+        <p>  {{ '&nbsp;' + user.school }} </p>
+        <p>, </p>
+        <p> {{ '&nbsp;' + user.schoolYear }}</p>
+
+        <p *ngIf="user.schoolYear == '1'">st year</p>
+        <p *ngIf="user.schoolYear == '2'">nd year</p>
+        <p *ngIf="user.schoolYear == '3'">rd year</p>
+        <p *ngIf="user.schoolYear > '3'">th year</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button type="button" class="cancel-button" (click)="onCloseDialog()">Close</button>
+    <button type="button" class="remove-member-button" (click)="onRemoveMember()">Remove from project</button>
+  </div>
+</div>

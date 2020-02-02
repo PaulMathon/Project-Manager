@@ -1,0 +1,53 @@
+<div class="page">
+  <div class="form-container">
+    <form [formGroup]="newGroupForm" (ngSubmit)="onSubmit()" class="form" autocomplete="off">
+      <div class="form-title-container">
+        <h2>New Project</h2>
+      </div>
+      <div class="title-group-container">
+        <div>
+          <label for="title">Title</label>
+          <input type="text" id="title" placeholder="Enter project's title" formControlName="title">
+        </div>
+        <small class="data-info">This project is private, no one can see what's happening in it.</small>
+      </div>
+      <div class="desc-group-container">
+        <label for="description">Description</label>
+        <textarea type="text" id="description" placeholder="Write a brief description" formControlName="description"></textarea>
+      </div>
+      <div class="members-group-container">
+        <label for="members">Members</label>
+        <div class="picked-member-container">
+          <div class="picked-member" role="alert" *ngFor="let member of members">
+            <strong>
+              {{member.name + ' ' + member.lastName}}
+            </strong>
+            <p> {{ member.school }} </p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="onRemoveMember(member)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="member-input-autocomplete">
+          <input autocomplete="off" type="text" id="members" (focus)="toggleDropDownUsers()" (keydown)="onSelectMembers($event)" (focusout)="toggleDropDownUsers()"  placeholder="Add members" formControlName="members">
+          <ul appClickOutside (clickOutside)="toggleDropDownUsers()" id="dropdown-user" class="members-container-dropdown" [ngClass]="showDropDownUsers ? 'drop-down' : ''">
+            <li class="unpicked-member" *ngFor="let member of users | userSearchFilter: getSearchValue()" (click)="onAddMember(member)" [ngClass]="member.selected ? 'selected' : ''">
+              {{member.name + ' ' + member.lastName}}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="end-group-container">
+        <label for="endDate">End of the project</label>
+        <input type="date" id="endDate" placeholder="Write a brief description" formControlName="endDate">
+      </div>
+
+      <div class="btn-submit-container">
+        <button type="submit" [disabled]="newGroupForm.invalid">Create group</button>
+      </div>
+    </form>
+  </div>
+</div>
+

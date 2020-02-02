@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="profile-container">
+
+    <div class="profile-picture-section">
+      <div class="profile-picture-container">
+        <img *ngIf="validProfileImage" [src]= "profilePictureUrl">
+        <img *ngIf="!validProfileImage" src= "../../assets/pictures/profile-pictures/default.jpg">
+      </div>
+
+      <div class="change-profile-picture">
+        <h3>Change your profile picture</h3>
+        <input style="display: none"
+               type="file"
+               (change)="onFileSelected($event)"
+               #profilePictureInput>
+        <button type="button" (click)="profilePictureInput.click()">Pick Picture</button>
+      </div>
+    </div>
+
+    <div class="profile-info-section">
+      <div class="user-name">
+        <h3 id="userName" contenteditable="true" (blur)="updateProfileValue($event)" (keypress)="preventDefaultEnterEvent($event)"> {{ user.name + ' ' + user.lastName}} </h3>
+      </div>
+      <div class="user-description">
+        <p *ngIf="user.description" id="userDescription" contenteditable="true" (blur)="updateProfileValue($event)" (keypress)="preventDefaultEnterEvent($event)"> {{ user.description }}</p>
+        <input *ngIf="!user.description || user.description === ''" type="textarea" id="userDescriptionInput" contenteditable="true" (blur)="updateProfileValue($event)" (keypress)="preventDefaultEnterEvent($event)">
+      </div>
+      <div class="user-email">
+        <p>{{ user.email }}</p>
+      </div>
+      <div class="user-birthdate">
+        <p *ngIf="!showDateInput" (click)="showDateInput = true" > {{ user.birth | date: 'longDate'}}</p>
+        <input *ngIf="showDateInput" type="date" id="userBirthDate" (blur)="updateProfileValue($event)" (keypress)="preventDefaultEnterEvent($event)">
+      </div>
+      <div class="user-school">
+        <p>School : </p>
+        <p *ngIf="!showSchoolSelect" (click)="showSchoolSelect = true">  {{ '&nbsp;' + user.school }} </p>
+        <select *ngIf="showSchoolSelect" id="userSchool"  (blur)="updateProfileValue($event)" (keypress)="preventDefaultEnterEvent($event)">
+          <option  disabled selected value>School...</option>
+          <option value="HEI">HEI</option>
+          <option value="ISA">ISA</option>
+          <option value="IESEG">IESEG</option>
+          <option value="Kedge">Kedge</option>
+          <option value="HEC">HEC</option>
+          <option value="ICAM">ICAM</option>
+        </select>
+        <p>, </p>
+        <p *ngIf="!showSchoolYearSelect" (click)="showSchoolYearSelect = true"> {{ '&nbsp;' + user.schoolYear }}</p>
+        <select *ngIf="showSchoolYearSelect" id="userSchoolYear"  (blur)="updateProfileValue($event)" (keypress)="preventDefaultEnterEvent($event)">
+          <option  disabled selected value>School Year...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <p *ngIf="user.schoolYear == '1'">st year</p>
+        <p *ngIf="user.schoolYear == '2'">nd year</p>
+        <p *ngIf="user.schoolYear == '3'">rd year</p>
+        <p *ngIf="user.schoolYear > '3'">th year</p>
+      </div>
+    </div>
+
+    <div class="profile-password-section">
+
+      <form *ngIf="!actualPasswordValid" [formGroup]="actualPasswordForm" (ngSubmit)="onSubmitActualPasswordForm()">
+        <label for="actualPassword" >Actual Password</label>
+        <input id="actualPassword" type="password" placeholder="Actual password" formControlName="actualPassword">
+        <input type="submit" [disabled]="actualPasswordForm.invalid" value="Enter">
+      </form>
+
+      <form *ngIf="actualPasswordValid" [formGroup]="newPasswordForm" (ngSubmit)="onSubmitnewPasswordForm()">
+        <label for="newPassword" >New Password</label>
+        <input id="newPassword" type="password" placeholder="New password" formControlName="newPassword">
+        <label for="confirmNewPassword" >Confirm New Password</label>
+        <input id="confirmNewPassword" type="password" placeholder="Confirm new password" formControlName="confirmNewPassword">
+        <input type="submit" [disabled]="newPasswordForm.invalid" value="Change Password">
+      </form>
+    </div>
+  </div>
+
+  <div class="popin-container" [ngClass]="isPopinActive ? 'popin-active' : ''">
+    <p> Change your <strong>{{ notificationPopInAttributes.attribute }}</strong> to "<strong>{{ notificationPopInAttributes.modification }}</strong>" </p>
+  </div>
+</div>
+

@@ -1,0 +1,35 @@
+<div class="add-member-container">
+  <div class="add-member-title-container">
+    <h3>Add some new members</h3>
+  </div>
+  <div class="add-member-form-container">
+    <form [formGroup]="addMemberForm" (ngSubmit)="onSubmit()">
+
+      <div class="members-group-container">
+        <div class="picked-member-container">
+          <div class="picked-member" role="alert" *ngFor="let member of pickedMembers">
+            <strong>
+              {{member.name + ' ' + member.lastName}}
+            </strong>
+            <p> {{ member.school }} </p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="onRemoveMember(member)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="member-input-autocomplete" (focusin)="toggleDropDownUsers()" (focusout)="unToggleDropDownUsers()">
+          <input autocomplete="off" type="text" id="members" (keydown)="onSelectMembers($event)" placeholder="Add members" formControlName="member">
+          <ul appClickOutside id="dropdown-user" class="members-container-dropdown" [ngClass]="showDropDownUsers ? 'drop-down' : ''">
+            <li class="unpicked-member" *ngFor="let member of unpickedMembers | userSearchFilter: getSearchValue()" (click)="onAddMember(member)" [ngClass]="member.selected ? 'selected' : ''">
+              {{member.name + ' ' + member.lastName}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="button-container">
+        <button type="button" class="cancel-button" (click)="cancelDialog()">Cancel</button>
+        <input type="submit" class="add-member-button" value="Add">
+      </div>
+    </form>
+  </div>
+</div>

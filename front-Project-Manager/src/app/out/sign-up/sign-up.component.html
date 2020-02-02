@@ -1,0 +1,70 @@
+<div class="form-container">
+  <h1 class="title">Project Manager</h1>
+  <h4 class="subtitle">If you're new to this, please fill the form to continue</h4>
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-type">
+      <label for="password">Your Email</label>
+      <div class="form-group">
+        <input type="email" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Enter email" formControlName="email">
+      </div>
+      <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="form-type">
+      <label for="password">Your Name</label>
+      <div class="form-group">
+        <input type="text" class="form-control" id="name" placeholder="First name" formControlName="name">
+        <input type="text" class="form-control" id="lastName" placeholder="Last name" formControlName="lastName">
+      </div>
+    </div>
+
+    <div class="form-type">
+      <label for="password">Password</label>
+      <div class="form-group">
+        <input type="password" class="form-control" id="password" placeholder="Password" formControlName="passwd">
+        <input type="password" class="form-control" id="password2" placeholder="Confirm password" formControlName="passwd2">
+      </div>
+    </div>
+
+    <div class="form-type">
+      <label for="school">School</label>
+      <div class="form-group">
+        <select class="custom-select mr-sm-2" id="school" formControlName="school">
+          <option  disabled selected value>School...</option>
+          <option value="HEI">HEI</option>
+          <option value="ISA">ISA</option>
+          <option value="IESEG">IESEG</option>
+          <option value="Kedge">Kedge</option>
+          <option value="HEC">HEC</option>
+          <option value="ICAM">ICAM</option>
+        </select>
+        <select class="custom-select" id="schoolYear" formControlName="schoolYear">
+          <option  disabled selected value>School Year...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-type">
+      <label for="birth">Birth</label>
+      <div class="form-group">
+        <input type="date" class="form-control" id="birth" placeholder="Birth date" formControlName="birth">
+      </div>
+    </div>
+    <p class="error-massage-container" [ngClass]="errorMessage === '' ? '' : 'error-message-container-active'">{{ errorMessage }}</p>
+
+    <div class="btn-container">
+      <button type="submit" class="btn btn-secondary" [disabled]="signUpForm.invalid">Sign Up</button>
+      <a type="submit" class="login" routerLink="/out/signin">Back to login</a>
+    </div>
+  </form>
+
+  <div class="learn-more-container">
+    <a href="#">Learn more about project manager</a>
+  </div>
+</div>

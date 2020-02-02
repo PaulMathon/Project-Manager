@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
+
+.page {
+  background-color: var(--background-color);
+  min-height: 100vh;
+  padding-top: 11vh;
+}
+
+.group-container {
+  margin-top:1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.group {
+  margin: 1em;
+  cursor: pointer;
+  display: flex;
+  border: solid 1px var(--border-color);
+  border-radius: 6px;
+  min-width: 50%;
+  height: 165px;
+  box-shadow: var(--box-shadow-color) 1px 2px 4px;
+  background-color: var(--background-color-second);
+  transition: all 300ms;
+}
+
+.group:hover {
+  min-width: 52%;
+  height: 22vh;
+}
+
+.group-img {
+  width: 30%;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  opacity: 0.92;
+}
+
+.group-body {
+  padding: 0.6em 1em;
+  position: relative;
+  width: 100%;
+  font-family: 'Karla', sans-serif;
+}
+
+.group-title {
+  font-size: var(--subtitle-font-size);
+  color: var(--text-black-color);
+  border-bottom: solid 1px var(--border-bottom-title-color);
+}
+
+.group-text {
+  font-size: var(--plain-text-font-size);
+  margin-top: 5px;
+  text-overflow: ellipsis;
+}
+
+.group-btn {
+  position: absolute;
+  bottom: 1em;
+  background-color: var(--orange-color);
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 4px 12px;
+  transition: background-color 300ms;
+}
+
+.group-btn:hover {
+  background-color: transparent;
+  border: solid 1px var(--orange-color);
+  color: var(--orange-color);
+}
+
+@media screen and (max-width: 1000px) and (min-width: 630px) {
+
+  .group {
+    min-width: 70%;
+    margin: 0.7em;
+  }
+
+  .group:hover {
+    min-width: 72%;
+  }
+}
+
+
+@media screen and (max-width: 630px) {
+
+  .group {
+    min-width: 92%;
+    margin: 0.5em;
+
+  }
+
+  .group:hover {
+    min-width: 94%;
+  }
+}

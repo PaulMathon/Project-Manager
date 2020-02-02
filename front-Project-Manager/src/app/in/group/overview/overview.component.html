@@ -1,0 +1,52 @@
+<div class="group-section-container">
+
+  <div class="group-section general-information-section" (click)="onNavigateToGeneralInformations()">
+    <div class="section-title-container general-information-el">
+      <h2 class="section-title"> {{ group.title }} <small> - General Informations</small></h2>
+      <img class="section-title-image" src="../../../../assets/pictures/group-section-pictures/information.jpg">
+    </div>
+
+    <div class="general-information-content">
+      <div class="general-information-el description-el">
+        <p>{{ group.description }}</p>
+      </div>
+
+
+      <div class="overview-date-container general-information-el down-section-el">
+          <p><strong>Start date</strong> {{ group.startDate  | date:'shortDate'}}</p>
+          <p><strong>End date</strong> {{ group.endDate  | date:'shortDate'}}</p>
+      </div>
+
+      <ul class="member-list-overview general-information-el down-section-el">
+        <li> <strong>Contributors :</strong></li>
+        <li *ngFor="let member of group.members; let i = index">
+          <p *ngIf="member.name && member.lastName">{{ member.name }} {{ member.lastName }}</p>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="group-section chat-section" (click)="onNavigateToChat()">
+    <div class="section-title-container">
+      <h2 class="section-title"> Conversation </h2>
+      <img class="section-title-image" src="../../../../assets/pictures/group-section-pictures/messages.jpg">
+    </div>
+  </div>
+
+  <div class="group-section schedule-section" (click)="onNavigateToSchedule()">
+    <div class="section-title-container">
+      <h2 class="section-title"> Schedule </h2>
+      <img class="section-title-image" src="../../../../assets/pictures/group-section-pictures/planning.jpg">
+    </div>
+  </div>
+
+  <div class="group-section schedule-section" (click)="onNavigateToSchedule()">
+    <div class="section-title-container">
+      <h2 class="section-title"> Statistics </h2>
+      <img class="section-title-image" src="../../../../assets/pictures/group-section-pictures/statistics.jpg">
+    </div>
+  </div>
+
+</div>

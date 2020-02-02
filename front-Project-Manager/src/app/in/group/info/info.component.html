@@ -1,0 +1,84 @@
+<div class="main-container">
+  <div class="info-title-container">
+    <h2>{{group.title}} - General Information</h2>
+  </div>
+  <div class="member-section">
+    <h3 class="member-title">Members</h3>
+    <div class="members-container">
+      <div class="member-container" *ngFor="let member of group.members" (click)="onOpenProfileOverviewDialog(member)">
+        <img src="{{member.profilePicture}}" class="profile-image" alt="avatar profile image">
+        <div class="profile-name">
+          <h5 class="">{{ member.name + ' ' + member.lastName }}</h5>
+        </div>
+        <div class="profile-link">
+          <p>See profile</p>
+        </div>
+      </div>
+
+      <div class="member-container add-member" (click)="onOpenAddMemberDialog()">
+        <div class="add-member-wrapper">
+          <img src="../../assets/icons/add.png" class="profile-image" alt="avatar profile image">
+          <div class="profile-name">
+            <h5 class="">Add group member</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="meetings-history-section info-section">
+    <div class="meetings-history-title-container info-title-container">
+      <h3 class="meetings-history-title info-title">Meetings history</h3>
+    </div>
+    <div class="meetings-history-container info-container">
+      <p *ngIf="group.meetingsDone.length === 0">There is no meetings that happened yet, to create one, see the planning section.</p>
+    </div>
+  </div>
+
+  <div class="upcoming-meetings-section">
+    <div class="upcoming-meetings-title-container">
+      <h3 class="upcoming-meetings-title">Upcoming meetings</h3>
+    </div>
+    <div class="upcoming-meetings-container">
+      <p *ngIf="group.meetingsPlanned.length === 0">There is no upcoming meetings for this group, to create one, see the planning section.</p>
+    </div>
+  </div>
+
+  <div class="end-date-section">
+    <div class="end-date-title-container">
+      <h3 class="end-date-title">Project's ending date</h3>
+    </div>
+    <div class="end-date-container">
+      <p>{{ group.endDate | date: 'longDate'}} - End in {{ timeUntilEnd.days }} days, {{ timeUntilEnd.hours }} hours, {{ timeUntilEnd.minutes }} minutes and {{ timeUntilEnd.seconds }} seconds </p>
+      <div class="end-date-btn-container">
+        <form [formGroup]="modifyEndDateForm" (ngSubmit)="handleEndDateModif()">
+          <input type="submit" class="end-date-submit" value="modify">
+          <input type="date" class="end-date-input" [ngClass]="showEndDateInput ? 'end-date-input-active' : ''" formControlName="endDate">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="remove-project-container">
+    <div class="remove-project-title-container">
+      <h3 class="remove-project-title">Remove project</h3>
+    </div>
+    <div class="remove-project-btn-container">
+      <button type="button" (click)="onOpenRemoveProjectSecurityDialog()">Remove Project</button>
+    </div>
+  </div>
+
+
+  <div class="popin-container" [ngClass]="isPopinActive ? 'popin-active' : ''">
+    <p *ngIf="notificationPopInAttributes.action === 'add'">
+      You just added {{ notificationPopInAttributes.users }} into project "{{ group.title }}"
+    </p>
+    <p *ngIf="notificationPopInAttributes.action === 'remove'">
+      You just removed {{ notificationPopInAttributes.user }} from project "{{ group.title }}"
+    </p>
+  </div>
+</div>
+
+
+

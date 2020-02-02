@@ -1,0 +1,19 @@
+<div class="remove-project-security-container">
+  <div class="remove-project-security-title">
+    <h4>Do you really want to remove this project ?</h4>
+  </div>
+  <div class="remove-project-security-form-container">
+    <form [formGroup]="titleSecurityForm" (ngSubmit)="onSubmit()">
+      <div class="enter-project-title">
+        <label for="project-title">Please enter the name of the project</label>
+        <input type="text" id="project-title" placeholder="project's name" formControlName="title">
+        <p *ngIf="errorMessage">{{errorMessage}}</p>
+      </div>
+      <div class="btn-container">
+        <button type="button" (click)="closeDialog()">Cancel</button>
+        <input type="submit" value="Remove">
+      </div>
+    </form>
+
+  </div>
+</div>

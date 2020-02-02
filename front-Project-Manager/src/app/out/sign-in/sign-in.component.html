@@ -1,0 +1,23 @@
+<div class="form-container">
+  <h1 class="title">Project Manager</h1>
+  <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="login">Email address</label>
+      <input type="email" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Enter email" formControlName="email">
+    </div>
+    <small>We'll never share your email with anyone else.</small>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password" formControlName="passwd">
+    </div>
+    <p class="error-massage-container" [ngClass]="errorMessage === '' ? '' : 'error-message-container-active'">{{ errorMessage }}</p>
+    <div class="btn-container form-group">
+      <button type="submit" [disabled]="signInForm.invalid">Connexion</button>
+      <a type="submit" class="new-account" routerLink="/out/signup">Create an account</a>
+    </div>
+  </form>
+
+  <div class="learn-more-container">
+    <a href="#">Learn more about project manager</a>
+  </div>
+</div>

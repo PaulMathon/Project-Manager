@@ -1,0 +1,53 @@
+<nav class="header">
+  <div id="burger-btn" class="burger" (click)="onClickOnBurger()">
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+  </div>
+  <div class="logo">
+    <h1 routerLink="/in/groups">Project Manager</h1>
+  </div>
+  <ul class="menu-items" [ngClass]="showBurgerMenu ? 'nav-active' : ''">
+    <li class="search-box menu-item">
+      <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <input class="search-txt" type="search" placeholder="Search" (input)="onSearchContentChange($event)" aria-label="Search" formControlName="search">
+        <button class="header-btn search-btn" type="submit">
+          <img src="../../assets/icons/search1.svg" alt="Search icon" height="18" width="18">
+        </button>
+      </form>
+    </li>
+    <li class="btn-container menu-item">
+      <div class="dropdown">
+        <button class="new-group-btn header-btn profile-btn" type="button" id="profile-button"  (focus)="onSetProfileMenuActive()" (focusout)="onSetProfileMenuUnactive()">
+          <span>{{ user.name }}</span>
+          <div class="dropdown-arrow" [ngClass]="[showProfileMenu ? 'dropdown-arrow-active' : '', hoverFirstChildElement ? 'dropdown-arrow-over' : '']"></div>
+          <div class="dropdown-profile-menu" id="dropdown-profile-menu" [ngClass]="showProfileMenu ? 'profile-menu-active' : ''"
+            appClickOutside (click)="onShowProfileMenu()">
+            <ul>
+              <li routerLink="/in/profile" (mouseover)="onHoverFirstChildElement()" (mouseout)="onHoverFirstChildElement()">
+                <p>Profile</p>
+              </li>
+              <li routerLink="/in/notifications">
+                <p>Notifications</p>
+                <span class="badge badge-danger badge-pill">4</span>
+              </li>
+              <li routerLink="/in/settings">
+                <p>Settings</p>
+              </li>
+              <li (click)="onLogOut()">
+                <p>Log out</p>
+              </li>
+            </ul>
+          </div>
+        </button>
+      </div>
+      <div class="btn-separator">
+        <div class="new-group-btn header-btn new-group-btn">
+          <a routerLink="/in/newgroup" class="text-link">New Group</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+

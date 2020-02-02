@@ -1,0 +1,13 @@
+<div class="page">
+
+  <div class="group-container">
+    <div class="group" style="width: 18rem;" *ngFor="let group of groups | groupSearchFilter: getSearchValue(); let i = index" (click)="onNavigateToGroup(group)">
+      <img src="{{randomImages[i]}}" class="group-img" alt="...">
+      <div class="group-body">
+        <h5 class="group-title">{{ group.title }}</h5>
+        <p class="group-text">{{ group.description }}</p>
+        <a class="group-btn">Visit</a>
+      </div>
+    </div>
+  </div>
+</div>

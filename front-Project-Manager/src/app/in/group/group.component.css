@@ -1,0 +1,13 @@
+.page {
+  padding: 120px 10% 40px;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-black-color);
+}
+
+@media screen and (max-width: 500px) {
+
+  .page {
+    padding: 85px 3% 40px;
+  }
+}

@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  project-manager:
+    container_name: project-manager
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: project-manager
+    ports:
+      - 3000:3000
+    links:
+      - database
+    environment:
+      PORT: 3000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules/
+    depends_on:
+      - database
+
+  database:
+    container_name: mongo
+    image: mongo
+    ports:
+      - 27017:27017
