@@ -1,21 +1,20 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import * as Fuse from 'fuse.js';
 
 @Pipe({
   name: 'userSearchFilter'
 })
 export class UserSearchFilterPipe implements PipeTransform {
 
-  transform(value: any, search: string): any {
+  transform(users: any, search: string): any {
     if (!search) {
-      return value;
+      return [];
     }
-    return value.filter(v => {
-      if (!v) {
-        return;
-      }
-      return v.lastName.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-             v.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-    });
+    const options: Fuse.FuseOptions<any> = {
+      keys: ['lastName', 'name'],
+    };
+    const fuse = new Fuse(users, options);
+    return fuse.search(search);
   }
 
 }
@@ -25,19 +24,23 @@ export class UserSearchFilterPipe implements PipeTransform {
 })
 export class GroupSearchFilterPipe implements PipeTransform {
 
-  transform(value: any, search: string): any {
+  transform(groups: any, search: string): any {
     if (!search) {
-      return value;
+      return groups;
     }
-
-    return value.filter(v => {
-      if (!v) {
-        return;
-      }
-
-      return v.title.toLowerCase().indexOf(search.toLowerCase()) !== -1
-        || v.description.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-    });
+    const options: Fuse.FuseOptions<any> = {
+      keys: [
+        { name: 'title', weight: 0.45 },
+        { name: 'description', weight: 0.2 },
+        { name: 'startDate', weight: 0.1 },
+        { name: 'endDate', weight: 0.1 },
+        { name: 'members.email', weight: 0.05 },
+        { name: 'members.name', weight: 0.05 },
+        { name: 'members.lastName', weight: 0.05 }
+      ],
+    };
+    const fuse = new Fuse(groups, options);
+    return fuse.search(search);
   }
 
 }
