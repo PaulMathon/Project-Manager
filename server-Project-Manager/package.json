@@ -23,7 +23,7 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "acorn": "^7.0.0",
+    "acorn": "^7.1.1",
     "eslint": "^6.2.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2"
